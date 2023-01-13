@@ -1,47 +1,52 @@
 
-// class  Users {
-//     constructor(name, email, password){
-//         this.name = name,
-//         this.email = email,
-//         this.password = password
-//     }
-// }
-        let inputName = document.getElementById("inputnombre").value;
-        let inputemail = document.getElementById("inputcorreo").value;
-        let inputPassword = document.getElementById("inputcontraseña").value;
-        let validatepass = document.getElementById(
-            "inputvalidarcontraseña"
-        ).value;
-        let madre = document.getElementById("madre").value;
+class Controls{
+    constructor(name, email, password, validapass){
+        this.name = name = document.getElementById("inputnombre");
+        this.email = email = document.getElementById("inputcorreo");
+        this.password = password = document.getElementById("inputcontraseña")
+        this.validapass = validapass = document.getElementById("inputvalidarcontraseña");
+    }
+   
+}
 
         class UI {
             addUser() {
-                let inputName = document.getElementById("inputnombre").value;
-                let inputemail = document.getElementById("inputcorreo").value;
-                let inputPassword =
-                    document.getElementById("inputcontraseña").value;
-                let validatepass = document.getElementById(
-                    "inputvalidarcontraseña"
-                ).value;
-                if (inputPassword !== validatepass) {
+                 let addInputs = new Controls()
+                 let addName = addInputs.name.value
+                 let addEmail = addInputs.email.value
+                 let addPassword = addInputs.password.value
+                 let validaPassword = addInputs.validapass.value
+                if (addPassword !== validaPassword) {
                     console.log("La contraseña no coincide");
                 } else {
                     userArray.push({
-                        name: inputName,
-                        email: inputemail,
-                        password: inputPassword,
+                        name: addName,
+                        email: addEmail,
+                        password: addPassword,
                     });
                     console.log(userArray);
                 }
             }
 
-            login(input) {
+            login() {
+                let logInputs = new Controls()
+                let nam = logInputs.name.value;
+                let pas = logInputs.password.value
                 userArray.forEach((element) => {
-                    if ((element.name === input.value)) {
-                        console.log("usuario existe");
-                    }
-                    console.log(userArray);
+                    if ((element.name === nam && element.password === pas)) {
+                        console.log("usuario autenticado");
+                     }else{
+                        console.log("Usuario o contraseña incorrecto");
+                     }                   
                 });
+            }
+
+            resetForm(){
+                 const emptyInputs = new Controls();
+                 emptyInputs.name.value=""
+                 emptyInputs.email.value=""
+                 emptyInputs.password.value=""
+                 emptyInputs.validapass.value="" 
             }
         }
 
@@ -51,12 +56,14 @@
             e.preventDefault();
             let iu = new UI();
             iu.addUser();
-        });
+            iu.resetForm()
+           
+;        });
 
         let btnlogin = document.getElementById("validarinfo");
         btnlogin.addEventListener("click", (e) => {
             let iu2 = new UI();
-            iu2.login(madre);
+            iu2.login();
         });
 
    
