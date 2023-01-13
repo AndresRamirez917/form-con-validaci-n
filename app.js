@@ -34,9 +34,11 @@ class Controls{
                  let validaPassword = addInputs.validapass.value
                  let empty = emptyvalidapassword.validapass
                 if (addPassword !== validaPassword) {
+                 alert("las contraseñas no coinciden")
                     console.log("La contraseña no coincide");
                     empty.value=""
                 } else {
+                    alert("Nuevo usuario creado")
                     userArray.push({
                         name: addName,
                         email: addEmail,
@@ -53,8 +55,10 @@ class Controls{
                 let pas = logInputs.password.value
                 userArray.forEach((element) => {
                     if ((element.name === nam && element.password === pas)) {
+                        alert("Usuario autenticado")
                         console.log("usuario autenticado");
                      }else{
+                        alert("Usuario o contraseña incorrecto")
                         console.log("Usuario o contraseña incorrecto");
                      }                   
                 });
