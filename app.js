@@ -11,6 +11,8 @@
  * - DE ACUERDO A LA VALIDACIÓN DE LOS DATOS SE MOSTRARÁn MENSAJES EN MODALES USANDO EL MDN SWEETALERT 
  * - EL BTNSENDUSER INSTANCIA LA CLASE UIFUNCTIONS PARA USAR EL MÉTODO ADDUSER(), Y TAMBIÉN INSTANCIA
  *   LA CLASE CONTROLS PARA VALIDAR QUE LOS CAMPOS NO ESTÉN VACIOS AL MOMENTO DE AGREGAR UN USUARIO.
+ *   SE HIZO UNA PEQUEÑA MEJORA PARA VALIDAR SI EL NOMBRE DE USUARIO O EL EMAIL YA EXISTEN EN EL ARRAY
+ *   A TRAVÉS DE LA FUNCIÓN VALIDAUSERNAME PERO NO FUNCIONA CORRECTAMENTE
  * - EL BTNLOGIN INSTANCIA LA CLASE UIFUNCTIONS PARA USAR EL MÉTODO LOGIN() Y RESETFORM() 
  * - LA AUTENTICACIÓN EN OCASIONES ARROJA ERROR Y NO FUNCIONA COMO DEBERIA CON EL IF
  * 
@@ -18,20 +20,22 @@
 
 import Controls from "./Clases/Control Class.js"
 import UIFunctions  from "./Clases/UI Class.js";
-
-
 let btnsendUser = document.getElementById("enviarinfo");
 btnsendUser.addEventListener("click", (e) => {
     e.preventDefault();
     let iufunctions = new UIFunctions();
     let emptyInputs = new Controls();
+    let resp = true;
     if(emptyInputs.name.value == "" ||
          emptyInputs.email.value == "" ||
          emptyInputs.password.value == "" ||
-         emptyInputs.validapass.value == ""){
-        iufunctions.validaInput()
-    } else  {
+         emptyInputs.validapass.value == ""){      
+        iufunctions.validaInput() 
+        //iufunctions.validaUserName()        
+    }
+    else{
         iufunctions.addUser()
+
     }
 });
 
@@ -40,8 +44,9 @@ btnlogin.addEventListener("click", (e) => {
     let iufunctions = new UIFunctions();
     iufunctions.login();
     iufunctions.resetForm();
-
 });
+
+
 
    
 
